@@ -1,23 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 
 function App() {
+  const [result, setResult] = useState(null);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      axios
+        .get("http://localhost:8000/latest")
+        .then((res) => setResult(res.data))
+        .catch((err) => console.error("Error:", err));
+    }, 2000);
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div style={{ padding: "2rem", fontFamily: "Arial" }}>
+      <h1>5G Cyber Attack Detection</h1>
+      {result && result.attack_type !== "None" ? (
+        <>
+          <h2>Attack Detected: <span style={{ color: "red" }}>{result.attack_type}</span></h2>
+          <p>Confidence: {result.confidence}</p>
+        </>
+      ) : (
+        <p>Waiting for data...</p>
+      )}
     </div>
   );
 }
