@@ -21,7 +21,7 @@ function App() {
       {result && result.attack_type !== "None" ? (
         <>
           <h2>Attack Detected: <span style={{ color: "red" }}>{result.attack_type}</span></h2>
-          <p>Confidence: {result.confidence}</p>
+          <p>Confidence: {result.confidence * 100}%</p>
         </>
       ) : (
         <p>Waiting for data...</p>
