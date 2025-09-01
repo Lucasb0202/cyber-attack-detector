@@ -3,6 +3,7 @@ import time
 import requests
 
 df = pd.read_csv("cic_combined_with_logs.csv")  
+df = df[df["Label"] != "BENIGN"]
 df = df.drop(columns=["Label", "LabelEnc"])  
 
 while True:
