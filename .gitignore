@@ -22,5 +22,5 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-cic_combined_with_logs.csv
+logs.csv
 rf_model.joblib
