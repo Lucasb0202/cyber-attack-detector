@@ -38,7 +38,7 @@ app = FastAPI()
 # CORS - for when stuff needs to talk across domains (mostly dev)
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Note: consider narrowing this in prod
+    allow_origins=["*"],  # consider narrowing this in prod
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -301,7 +301,7 @@ def _features_table(feature_dict, max_cols=2):
     ]))
     return table
 
-# Create a PDF from an event's details
+# create a PDF from an event's details
 def _build_report_to_bytes(event):
     buffer = io.BytesIO()
     doc = SimpleDocTemplate(buffer, pagesize=A4,
@@ -404,7 +404,7 @@ def download_report(event_id: str):
 def normalize_label(label: str) -> str:
     return label.replace("�", "-").strip()
 
-# Attack detection endpoint — the real action happens here
+# Attack detection endpoint 
 @app.post("/detect")
 def detect_attack(data: Features):
     global latest_result
